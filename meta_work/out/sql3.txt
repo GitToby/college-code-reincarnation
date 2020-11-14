@@ -1,0 +1,42 @@
+Sqtup.sql file for user installs
+// First off, creating the database. It won't have any information
+// stored, it's just a blank canvas
+CREATE DATABASE "Computing2 ;
+// create the user at local host, with the password "chicken"
+CREATE USER 'toby '@'localhost' IDENTIFIED BY 'chicken' ;
+// Grant all permissions to all the tables in computing2 to the user
+// just created.
+GRANT ALL ON computing2. * TO 'toby'@'localhost' ;
+// Again creating another user, this time however at % which allows
+the users to access thedatabase
+CREATE USER 'toby'@' %' IDENTIFIED BY 'chicken' ;
+/ / This new user then must have all the permissions on the computing
+// database also, this allows for the user at any location to access
+// the DB
+GRANT ALL ON computing2. * TO 'toby' @'localhost' ;
+// selects the newly created computing database to use
+USE computing2
+// Starts creation of the tables to populate the database
+DROP TABLE IF EXISTS Contacts ;
+CREATE TABLE Contacts (
+`ContactID" MEDIUMINT AUTO INCREMENT NOT NULL,
+`FirstName VARCHAR (20) NOT NULL ,
+`LastName VARCHAR ( 20) NOT NULL ,
+DOB DATE NOT NULL
+~Email VARCHAR (50) NOT NULL,
+~Phone ~ VARCHAR (12) NOT NULL,
+PRIMARY KEY (ContactID)
+) ;
+DROP TABLE IF EXISTS Relations ;
+CREATE TABLE Relations (
+`Reference MEDIUMINT (4) AUTO_INCREMENT NOT NULL ,
+`ContactID1 MEDIUMINT (4) NOT NULL,
+~ContactID2" MEDIUMINT (4) NOT NULL,
+PRIMARY KEY (Reference)
+) ;
+DROP TABLE IF EXISTS MemberTypes ;
+CREATE TABLE MemberTypes (
+"TypeID" MEDIUMINT Primary KEY NOT NULL,
+TypeDescription
+VARCHAR (10) NOT NULL
+) ;

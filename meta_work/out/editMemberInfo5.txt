@@ -1,0 +1,55 @@
+End Sub
+#Region "Textbox changes"
+Private Sub DateTimePicker1 ValueChanged(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles DateTimePicker1. ValueChanged
+Dim datenow As Date = Date. Now
+Dim dateGiven As Date = DateTimePicker1. Text
+LabelAge. Text = DateDiff(DateInterval. Year, dateGiven, datenow)
+If LabelAge. Text > 5 And LabelAge.Text <= 60 Then
+ApplyTrueValidation (LabelAge, DoBValid)
+Else
+End If
+ApplyFalseValidation(LabelAge, DoBValid)
+End Sub
+Private Sub TextBoxPhone_TextChanged(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles TextBoxNewPhone. TextChanged
+If checkValidation(TextBoxNewPhone. Text, regexPhone) = True Then
+ApplyTrueValidation (TextBoxNewPhone, PhoneValid)
+Else
+ApplyFalseValidation(TextBoxNewPhone, PhoneValid)
+End If
+End Sub
+Private Sub TextBoxEmail_TextChanged(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles TextBoxNewEmail. TextChanged
+If checkValidation(TextBoxNewEmail.Text, regexEmail) = True Then
+ApplyTrueValidation(TextBoxNewEmail, EmailValid)
+Else
+ApplyFalseValidation(TextBoxNewEmail, EmailValid)
+End If
+End Sub
+Private Sub ComboBox1_SelectedIndexChanged(ByVal sender As System.Object, ByVal e
+As System. EventArgs)
+End Sub
+#End Region
+Function checkValidation(ByVal Input, ByVal RegexString) As Boolean
+' find a match in the input that complies with the Specific regex string
+passed into
+Dim m As Match = Regex. Match(Input, RegexString)
+'checks the validation of the match
+checkValidation = (m.Success)
+End Function
+#Region "TRUE/FALSE Validation Aplications"
+Sub ApplyTrueValidation(ByRef Textbox As Object, ByRef validStatement As Boolean)
+Textbox. backcolor = Color. LightGreen
+validStatement = True
+End Sub
+Sub ApplyFalseValidation(ByRef Textbox As Object, ByRef validStatement As Boolean)
+Textbox. backcolor = Color. Red
+validStatement = False
+End Sub
+#End Region
+Public Function UpdateContactRelationsCallback(ByRef Relations As List(Of
+bouncer) ) As Integer
+DisplayRelations = Relations
+WriteOutLists(DisplayRelations, ListViewContactRelations)
+'Auto sizes columns to width of content

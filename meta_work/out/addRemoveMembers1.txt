@@ -1,0 +1,51 @@
+emove Members
+Imports MySql. Data. MySqlClient
+Imports System. Text. RegularExpressions
+Public Class AddRemoveMembers
+'Declares a function that will send the "UpdatedListOfRelations" to a function in
+the parent form when the update button is clicked
+Integer
+Delegate Function callback(ByRef UpdatedListOfRelations As List(Of bouncer) ) As
+#Region "connection stuffs"
+Dim connectionString As String = _
+"Database=Computing;" &
+"Data Source=localhost;" & _
+"User Id=toby; " &
+"Password=chicken;"
+Dim connection As New MySqlConnection(connectionString)
+#End Region
+Private Localalljumpers As List(Of bouncer)
+Private LocalcontactRelations As List(Of bouncer)
+Private UpdateCallBack As callback
+`creates an undefined size array to save all the members clicked on the listbox
+that is selected
+Dim items()
+Dim ArrayOfBouncerIDs() As Object
+Dim findNumbers As String = "[0-9]+"
+Public Sub New(ByRef Alljumpers As List(Of bouncer), ByRef contactRelations As
+List (Of bouncer), ByVal UpdateCallbackFunction As callback)
+' This call is required by the designer.
+InitializeComponent()
+'creates a local references
+Localalljumpers = Alljumpers
+LocalcontactRelations = contactRelations
+' this passes the adress of the function to be called when updating the page
+UpdateCallBack = UpdateCallbackFunction
+End Sub
+Private Sub Add_RemoveMembers_Load(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles MyBase. Load
+DisplayList(Localalljumpers, LocalcontactRelations)
+End Sub
+#Region "Button Clicks"
+Private Sub ButtonCancel_Click(ByVal sender As System. Object, ByVal e As
+System. EventArgs) Handles ButtonCancel. Click
+Me. Close( )
+End Sub
+Private Sub ButtonUpdate_Click(ByVal sender As System. Object, ByVal e As
+System. EventArgs) Handles ButtonUpdate. Click
+recreates the local contacts list using the current listbox
+LocalcontactRelations.Clear()
+For count = 0 To CheckedListBoxCurrent. Items. Count - 1 ' the minus 1 is
+because the checked list box is a 1 based list
+' whereas the list view box is a 0 based list.
+Dim jumperIndex As Integer

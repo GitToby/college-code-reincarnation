@@ -1,0 +1,21 @@
+Dim m As Match = Regex.Match(Input, RegexString)
+'checks the validation of the match
+checkValidation = (m.Success)
+End Function
+Public Function UpdateContactRelationsCallback(ByRef Relations As List(Of
+bouncer) ) As Integer
+ListViewContactRelations.Items. Clear( )
+LocalContactRelations = Relations
+Dim b As bouncer
+' iterates throught the instances of each bouncer
+For Each b In LocalContactRelations
+'creates the table with details and such using each instances information
+Dim item As ListViewItem = New ListViewItem(b.GetContactID. ToString)
+ListViewContactRelations.Items.Add(item)
+item. SubItems. Add (b.GetFirstName. ToString)
+item. SubItems. Add (b. GetLastName)
+item.SubItems.Add (b.GetEmail)
+Next
+ListViewContactRelations.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+End Function
+End Class

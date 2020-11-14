@@ -1,0 +1,15 @@
+Private Sub ButtonSessionThree_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonSessionThree.Click
+ButtonClick(3)
+End Sub
+#End Region
+Sub ButtonClick(ByVal SessionID)
+'creates the new instnace of the "sessionInfo" and passes itself as a
+parameter
+Dim NewPage As New SessionInfo(SessionID, Me, LocalAllJupers)
+shows the new page
+NewPage. Show( )
+'hides the current page
+Me. Hide( )
+End Sub
+End Class

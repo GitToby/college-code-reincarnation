@@ -1,0 +1,8 @@
+Public Function UpdateSessionMembersCallback(ByRef Relations As List(Of bouncer))
+As Integer
+LocalSessionJumpers = Relations
+WriteOutLists()
+'Auto sizes columns to width of content
+ListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+End Function
+End Class

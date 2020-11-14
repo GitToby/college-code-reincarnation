@@ -1,0 +1,56 @@
+Dim b As bouncer
+' iterates throught the instances of each bouncer
+For Each b In List
+information
+creates the table with details and such using each instances
+Dim item As ListViewItem = New ListViewItem(b.GetContactID. ToString)
+ListBox. Items. Add (item)
+item. SubItems. Add (b. GetFirstName)
+item. SubItems. Add(b. GetLastName)
+item. SubItems.Add(b.GetEmail)
+item. SubItems. Add (b.GetPhone)
+Next
+End If
+End Sub
+Sub WriteOutSessions()
+'THIS HALF OF THE SUB IS A VARIENT OF THE GetRelationsList() HOWEVER DUE TO
+DIFFERENT CLASS USES AND PROPERTIES THE TWO CANNOT BE MERGED
+Dim query As String = "SELECT * FROM " ContactSessions JOIN `SessionTable" ON
+ContactSessions. sessionIDRef = SessionTable.SessionID JOIN `MemberTypes" ON
+SessionTable. MemberTypeKey = MemberTypes. TypeID WHERE ContactIDRef = " &
+DisplayMember.GetContactID & " ORDER BY DayOfWeek;"
+Dim command As New MySqlCommand (query, connection)
+Try .
+connection.Open()
+Dim dr As MySql. Data. MySqlClient. MySqlDataReader
+dr = command. ExecuteReader()
+Dim i As Integer
+While dr. Read
+JumperSessions.Add(New session)
+With JumperSessions (i)
+SetSessionID(dr( "SessionID"))
+. SetStartTime(dr("StartTime"))
+.SetEndTime(dr( "EndTime"))
+. SetDayOfWeek (dr("DayOfWeek"))
+. SetMemberType(dr("TypeDescription"))
+End With
+i = i + 1
+End While
+connection.Close( )
+Catch ex As MySqlException
+MsgBox( "Error:" & ex. ErrorCode & " --- " & ex. Message. ToString & vbNewLine
+& vbNewLine & ex. ToString)
+End Try
+'THIS HALF WRITES UP THE SESSIONS TO THE LIST
+ListViewSessions.Items. Clear()
+If JumperSessions. Count = 0 Then
+'Do Nothing
+Else
+creates an instance of a bouncer
+Dim s As session
+' iterates throught the instances of each bouncer
+For Each s In JumperSessions
+creates the table with details and such using each instances
+information
+Dim item As ListViewItem = New ListViewItem(s.GetSessionID. ToString)
+ListViewSessions. Items. Add (item)

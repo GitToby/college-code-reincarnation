@@ -1,0 +1,38 @@
+For i = 0 To a. Length( ) - 1
+'Randomise to ensure no logic errors
+ii = New System. Random().Next(0, a.Length( ) - 1)
+If i <> ii Then
+swap(a(i), a(ii))
+End If
+Next
+quicksort(a, 0, a. Length())
+End Sub
+Function getpivot(ByRef a() As Object, ByVal Top As Integer, ByVal Bottom As
+Integer)
+Return New System. Random(). Next (Top, Bottom - 1)
+End Function
+Function partition(ByRef a() As Object, ByVal Top As Integer, ByVal Bottom As
+Integer, ByRef pivot As Integer)
+Dim i
+Dim piv
+Dim store
+piv = a(pivot)
+swap(a(Bottom - 1), a(pivot))
+store = Top
+For i = Top To Bottom - 2
+If a(i) <= piv Then
+swap(a(store), a(i))
+store = store + 1
+End If
+Next
+swap(a(Bottom - 1), a(store))
+Return store
+End Function
+Sub swap (ByRef v1, ByRef v2)
+Dim tmp
+tmp = v1
+v1 = v2
+v2 = tmp
+End Sub
+#End Region
+End Class

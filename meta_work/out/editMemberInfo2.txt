@@ -1,0 +1,55 @@
+End Sub
+Private Sub ButtonCancel_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonCancel. Click
+LocalParentPage. Show( )
+Me. Close( )
+End Sub
+Private Sub ButtonSaveToDB_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonUpdateAll. Click
+'selects wether the inputsa are true or not.
+If EmailValid = True And DoBValid = True And PhoneValid = True Then
+'this is the command that tells the database what to do by passing the
+cammand into a sepurate db hadlind sub
+first statement: Updating infomation into the contacts table
+DBCommand (_
+"UPDATE "contacts" SET" &
+" DoB = "" & DateTimePicker1. Value. ToString("yyyy-MM-dd" ) & " " , " &
+-
+" Email = '" & TextBoxNewEmail. Text. ToString &
+&
+" Phone = "" & TextBoxNewPhone. Text. ToString & "" "
+&
+"WHERE ContactID = " & DisplayJumper. GetContactID & ";
+'Second and thrid SQL statments update the
+second statement: Removes any current relations inorder to refesh the
+contacts relations
+DBCommand ( "DELETE FROM `Relations WHERE ContactID1 = " &
+DisplayJumper. GetContactID & ";")
+' third statement: iterated to insert infomation into the relations table
+If ListViewContactRelations.Items. Count - 1 > 0 Then
+For count = 0 To ListViewContactRelations.Items.Count - 1
+DBCommand (_
+"INSERT INTO `Relations (ContactID1, ContactID2)" &
+"VALUES (" & Localalljumpers. Item(Localalljumpers.Count -
+1).GetContactID + 1 & ", " &
+ListViewContactRelations.Items. Item(count).SubItems. Item(0). Text & ") ;" _
+Next
+Else
+MsgBox( "Please Note: No contacts selected for Member " &
+DisplayJumper. GetFirstName & " " & DisplayJumper. GetLastName)
+End If
+' fourth statement: reseting the ContactSession for the specific member
+DBCommand ("DELETE FROM 'ContactSessions' WHERE ContactIDRef = " &
+DisplayJumper. GetContactID & ";")
+' fifth statements: Adds to each session where applicable
+Dim SessionAdded As Boolean = False
+If CheckBoxAttendingSession1.CheckState = CheckState. Checked Then
+DBCommand ("INSERT INTO 'ContactSessions' (ContactIDRef, SessionIDRef)
+VALUES (" & Localalljumpers.Item(Localalljumpers.Count - 1).GetContactID + 1 & ", " & 1
+& "); ")
+SessionAdded = True
+End If
+If CheckBoxAttendingSession2.CheckState = CheckState. Checked Then
+DBCommand("INSERT INTO 'ContactSessions' (ContactIDRef, SessionIDRef)
+& ") ; ")
+VALUES (" & Localalljumpers.Item(Localalljumpers.Count - 1).GetContactID + 1 & "," & 2

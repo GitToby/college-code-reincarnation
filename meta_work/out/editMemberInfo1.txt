@@ -1,0 +1,48 @@
+Imports MySql. Data. MySqlClient
+Imports System. Text. RegularExpressions
+Public Class EditMemberInfo
+Dim connectionString As String =
+"Database=Computing2; " &
+"Data Source=localhost;" &
+-
+"User Id=toby;" &
+"Password=chicken; "
+Dim connection As New MySqlConnection(connectionString)
+Dim DoBValid As Boolean
+Dim EmailValid As Boolean
+Dim PhoneValid As Boolean
+Dim regexName As String = ("^[A-Z]{1} [a-z]+$")
+Dim regexEmail As String = ("^[a-zA-Z][\w. - ]*[a-zA-Z0-9]@[a-zA-z0-9][\w - - ]*[a-
+ZA-Z0-9]. [a-zA-Z][a-zA-Z. ]*[a-zA-Z]$")
+Dim regexPhone As String = ("^0[0-9]{10}$")
+Dim Localalljumpers As List(Of bouncer)
+Dim DisplayRelations As List(Of bouncer)
+Dim DisplayJumper As bouncer
+Dim localJumperSessions As List(Of Session)
+Dim LocalParentPage As MemberPage
+Public Sub New(ByRef jumper As bouncer, ByRef Alljumpers As List(Of bouncer),
+ByRef relations As List(Of bouncer), ByVal parentpage As MemberPage, ByRef
+jumperSessions As List(Of Session))
+' This call is required by the designer.
+InitializeComponent()
+' Add any initialization after the InitializeComponent() call.
+creates referencefor the local display member, all the jumpers and the
+relations for the display member
+DisplayJumper = jumper
+Localalljumpers = Alljumpers
+DisplayRelations = relations
+LocalParentPage = parentpage
+localjumperSessions = jumperSessions
+End Sub
+Private Sub EditMemberInfo_Load(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles MyBase. Load
+Me. Refresh( )
+'sets the headlines of the page and the lables
+Me. Text = DisplayJumper.GetContactID. ToString & "-" &
+DisplayJumper. GetFirstName & " " & DisplayJumper. GetLastName
+LabelMemberName. Text = DisplayJumper.GetFirstName & " " &
+DisplayJumper. GetLastName
+resets the page, recreating the original data from the start
+reset( )
+'creates the list view to show only the right size data
+ListViewContactRelations.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)

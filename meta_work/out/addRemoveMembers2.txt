@@ -1,0 +1,54 @@
+jumperIndex = Regex.Match(CheckedListBoxCurrent. Items. Item( count),
+findNumbers).Value - 1
+again the - 1 above is beacuse the list of all jumbers works with a 0
+based list, if there wasnt a - 1 then on each update click all the jumpers ids would
+increase by one.
+LocalcontactRelations.Add(Localalljumpers. Item(jumperIndex))
+Next
+this calls the function within the parent form, passing the updated local
+contact relations through
+UpdateCallBack(LocalcontactRelations)
+'after this function the code can run indapendantly still, the callback
+function is run, then the code runs here after.
+Me. Close( )
+End Sub
+Private Sub ButtonAdd_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonAdd. Click
+ItemMove (CheckedListBoxPossible, CheckedListBoxCurrent)
+End Sub
+Private Sub ButtonRemove_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonRemove. Click
+ItemMove (CheckedListBoxCurrent, CheckedListBoxPossible)
+End Sub
+#End Region
+#Region "Subs"
+Sub ItemMove(ByVal ListBoxSource, ByVal ListBoxDestination)
+'resizes the array to the exact number of checked items
+ReDim Preserve items(ListBoxSource.CheckedItems. Count - 1)
+'copies all the checkeditems into a the new array to copy into the other box
+ListBoxSource. CheckedItems. CopyTo(items, 0)
+For count = 0 To items. Length - 1
+adds selected items to one list
+ListBoxDestination. Items. Add (items (count) )
+' removes them from the other
+ListBoxSource. Items. Remove(items (count))
+Next
+sortColumn(ListBoxDestination)
+End Sub
+Sub DisplayList(ByRef Full As List(Of bouncer), ByRef Current As List(Of bouncer))
+Dim x As bouncer ' used to search through the full list
+Dim y As bouncer ' used to search through the current list
+Dim found As Boolean ' used as an identifyer so copies are not written out
+For Each x In Full
+For Each y In Current
+If x.GetContactID = y.GetContactID Then
+found = True
+Exit For
+Else
+found = False
+End If
+Next
+If found Then
+&
+& y . GetLastName)
+CheckedListBoxCurrent. Items. Add (y. GetContactID & "-" & y. GetFirstName

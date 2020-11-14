@@ -1,0 +1,51 @@
+ssion Info
+Imports MySql. Data. MySqlClient
+Public Class SessionInfo
+#Region "DB connection strings and such"
+Public connectionString As String =
+"Database=Computing2;" &
+-
+"Data Source=localhost;" &
+"User Id=toby;" &
+"Password=chicken;"
+"database=Computing" selects database from the list of mysql databases, use
+"show databases" in mysql
+database
+"data Source = localhost" uses the local machine ip as the data source for the
+"User ID=toby" selects the user from table mysql. users called toby with all the
+permissions it has
+"password=chicken" uses the password "chicken" to check against the password
+given int the table above for a login
+' connects using mySQL using the connectionstring described above
+Dim connection As New MySqlConnection(connectionString)
+#End Region
+Dim LocalSessionID As Integer
+Dim LocalSessionJumpers As New List(Of bouncer)
+Dim LocalSesionDetails As New Session
+Dim localParentpage As SessionTimetable
+Dim localAllJumpers As List(Of bouncer)
+Public Sub New(ByVal SessionID As Integer, ByVal ParentPage As SessionTimetable,
+ByVal allJupers As List(Of bouncer))
+' This call is required by the designer.
+InitializeComponent()
+Add any initialization after the InitializeComponent() call.
+LocalSessionID = SessionID
+localParentpage = ParentPage
+localAllJumpers = allJupers
+End Sub
+Private Sub SessionInfo_Load(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles MyBase. Load
+getMembers()
+getSessionDetails()
+End Sub
+Private Sub ButtonBack_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonBack. Click
+DBCommand ("DELETE FROM 'ContactSessions" WHERE SessionIDRef = " &
+LocalSessionID & ";")
+For count = 0 To ListView. Items. Count - 1
+DBCommand ( _
+"INSERT INTO 'ContactSessions' (ContactIDRef, SessionIDRef) " &
+"VALUES (" & ListView. Items. Item(count). SubItems. Item(0). Text & ", "
+& LocalSessionID & ") ;"
+-
+Next

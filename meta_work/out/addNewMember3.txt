@@ -1,0 +1,55 @@
+If CheckBoxAttendingSession3.CheckState = CheckState. Checked Then
+DBCommand ("INSERT INTO `ContactSessions" (ContactIDRef, SessionIDRef)
+VALUES (" & LocalAllJumpers.Item(LocalAllJumpers.Count - 1).GetContactID + 1 & "," & 3
+& ") ; ")
+SessionAdded = True
+End If
+If Not SessionAdded Then
+MsgBox( "Please Note: No sessions added for New Member " &
+TextBoxFirst. Text & " " & TextBoxLast. Text)
+End If
+TextBoxEmail. Text = ""
+TextBoxFirst. Text =
+TextBoxLast. Text = ""
+TextBoxPhone. Text =
+LabelAge. Text = ""
+ListViewContactRelations.Clear()
+Dim newpage As New MainMenu( )
+newpage. Show( )
+Me. Close( )
+Else
+MsgBox( "One or more fields are not valid, please make sure all the fields
+are green before pressing save")
+End If
+End Sub
+Sub DBCommand (ByVal Query)
+Dim command As MySqlCommand
+creates the command with the querey passed
+command = New MySqlCommand(Query, connection)
+' MsgBox ( command. CommandText. ToString)
+Try
+connection. Open()
+command . ExecuteNonQuery ()
+Catch ex As MySqlException
+MsgBox("Error:" & ex. ErrorCode & " --- " & ex. Message. ToString & vbNewLine
+& vbNewLine & ex. ToString)
+End Try
+connection.Close( )
+End Sub
+#Region "value Changes"
+Private Sub DateTimePicker1_ValueChanged(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles DateTimePicker1. ValueChanged
+'finds dated to caluculate age
+Dim datenow As Date = Date. Now
+Dim dateGiven As Date = DateTimePicker1. Text
+'caluculates age
+LabelAge. Text = DateDiff(DateInterval.Year, dateGiven, datenow) - 1
+'enforces age limit
+If LabelAge. Text > 8 And LabelAge. Text <= 60 Then
+ApplyTrueValidation(LabelAge, DoBValid)
+DoBValid = True
+Else
+ApplyFalseValidation(LabelAge, DoBValid)
+DoBValid = False
+End If
+End Sub

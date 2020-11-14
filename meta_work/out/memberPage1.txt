@@ -1,0 +1,52 @@
+Member Page
+Imports MySql.Data. MySqlClient
+Public Class MemberPage
+Private DisplayMember As bouncer
+Dim ContactRelations As New List(Of bouncer)
+Dim LocalAllJumpers As New List(Of bouncer)
+Dim JumperSessions As New List(Of Session)
+#Region "connection stuffs"
+Dim connectionString As String =
+"Database=Computing2;" &
+- -
+"Data Source=localhost;" &
+"User Id=toby;" &
+"Password=chicken; "
+Dim connection As New MySqlConnection(connectionString)
+#End Region
+Public Sub New(ByRef LocalJumper As bouncer, ByVal Alljumpers As List(Of bouncer))
+" This call is required by the designer.
+InitializeComponent()
+' Add any initialization after the InitializeComponent() call.
+'gets the display information
+DisplayMember = LocalJumper
+gets a local set of all the jumpers
+LocalAllJumpers = Alljumpers
+End Sub
+Private Sub MemberPage_Load (ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles MyBase. Load
+Me. Refresh( )
+'gets all the contacts that are linked to the display contact (uses sql in the
+sub. )
+GetRelationsList( )
+gets specific information stored in the class instance and displays it in the
+right place
+Me. Text = DisplayMember. GetContactID. ToString & "-" &
+DisplayMember.GetFirstName & " " & DisplayMember. GetLastName
+LabelMemberName. Text = DisplayMember. GetFirstName & " " &
+DisplayMember.GetLastName
+LabelDoB. Text = DisplayMember. GetDoB
+LabelEmail. Text = DisplayMember. GetEmail
+LableContactID. Text = DisplayMember. GetContactID
+LabelPhone. Text = DisplayMember. GetPhone
+WriteOutBouncers(ContactRelations, ListViewContactRelations)
+WriteOutSessions()
+ListViewContactRelations.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+ListViewContactRelations.GridLines = True
+ListViewSessions.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+ListViewSessions. GridLines = True
+End Sub
+Private Sub ButtonBack_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonBack. Click
+Me. Close( )
+End Sub

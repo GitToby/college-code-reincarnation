@@ -1,0 +1,54 @@
+SessionAdded = True
+End If
+If CheckBoxAttendingSession3. CheckState = CheckState. Checked Then
+DBCommand ("INSERT INTO 'ContactSessions" (ContactIDRef, SessionIDRef)
+& " ); " )
+VALUES (" & Localalljumpers.Item(Localalljumpers.Count - 1).GetContactID + 1 & "," & 3
+SessionAdded = True
+End If
+If Not SessionAdded Then
+MsgBox ("Please Note: No sessions selected for Member " &
+DisplayJumper. GetFirstName & " " & DisplayJumper.GetLastName)
+End If
+'closes page and restarts into into the member page
+LocalParentPage. Close()
+Dim newpage As New MemberPage(DisplayJumper, Localalljumpers)
+newpage. Show( )
+Me. Close()
+Else
+MsgBox("One or more fields are not valid, please make sure all the fields
+are green before pressing save")
+End If
+End Sub
+Sub DBCommand (ByVal Query)
+Dim command As MySqlCommand
+command = New MySqlCommand(Query, connection)
+whitebox test msgbx below to visualise the input statement before code is
+run
+'MsgBox ( command . CommandText. ToString)
+Try
+connection. Open()
+command . ExecuteNonQuery ()
+Catch ex As MySqlException
+gives the sql error code and the descrition for sorting out later
+MsgBox("Error:" & ex. ErrorCode & " --- " & ex.Message. ToString & vbNewLine
+& vbNewLine & ex. ToString)
+End Try
+connection.Close( )
+End Sub
+Private Sub ButtonAddContactRelation_Click(ByVal sender As System.Object, ByVal e
+As System. EventArgs) Handles ButtonAddContactRelation. Click
+'Passes the ADRESSOF the callback function within the EditMemberInfoClass to
+be called later
+Dim CreatePage As New AddRemoveMembers(Localalljumpers, DisplayRelations,
+AddressOf UpdateContactRelationsCallback)
+CreatePage. Show( )
+End Sub
+Private Sub ButtonReset_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonReset. Click
+reset()
+End Sub
+Sub reset( )
+'sets the current labels to show the current stored data
+LabelCurrentDoB. Text = DisplayJumper. GetDoB
+LabelCurrentEmail.Text = DisplayJumper.GetEmail. ToString

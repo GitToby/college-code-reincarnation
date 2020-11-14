@@ -1,0 +1,52 @@
+localParentpage. Show( )
+Me. Close( )
+End Sub
+Sub DBCommand (ByVal Query)
+Dim command As MySqlCommand
+command = New MySqlCommand(Query, connection)
+'MsgBox( command. CommandText. ToString)
+Try
+connection. Open()
+command . ExecuteNonQuery ()
+Catch ex As MySqlException
+MsgBox("Error:" & ex. ErrorCode & " --- " & ex.Message. ToString & vbNewLine
+& vbNewLine & ex. ToString)
+End Try
+connection. Close( )
+End Sub
+Sub getSessionDetails()
+is the command that descrives the data retrieved
+Dim query As String = "SELECT * FROM "SessionTable JOIN `memberTypes" ON
+SessionTable.MemberTypeKey = MemberTypes. TypeID WHERE "sessionID = " & LocalSessionID
+& " . "
+this is the command exicuted, using the query described above in the
+connection 2 above
+Dim command As New MySqlCommand (query, connection)
+Try
+connection . Open( )
+Dim dr As MySql. Data. MySqlClient. MySqlDataReader
+dr = command. ExecuteReader( )
+' saving all the session information
+While dr. Read
+LocalSesionDetails.SetSessionID(dr("SessionID") )
+LocalSesionDetails.SetDayOfWeek(dr ("DayOfWeek"))
+LocalSesionDetails.SetStartTime(dr("StartTime"))
+LocalSesionDetails.SetEndTime(dr("EndTime"))
+LocalSesionDetails.SetMemberType(dr("TypeDescription"))
+End While
+connection.Close( )
+LabelSessionDay. Text = LocalSesionDetails.GetDateOfWeek. ToString
+LabelSessionStartTime.Text = LocalSesionDetails.GetStartTime. ToString
+LabelSessionEndTime.Text = LocalSesionDetails.GetEndTime. ToString
+LabelBouncerType.Text = LocalSesionDetails.GetMemberType. ToString
+Catch ex As MySqlException
+MsgBox("Error Retreiving Sessoins:" & ex. ErrorCode & " ---
+" &
+ex. Message. ToString & vbNewLine & vbNewLine & ex. ToString)
+End Try
+End Sub
+Sub getMembers()
+is the command that descrives the data retrieved
+Dim query As String = "SELECT * FROM ' contacts' JOIN 'ContactSessions" ON
+Contacts. ContactID = ContactSessions.ContactIDRef WHERE ContactSessions.SessionIDRef
+=" & LocalSessionID & ";"

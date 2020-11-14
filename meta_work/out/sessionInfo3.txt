@@ -1,0 +1,55 @@
+connection 2 above
+'this is the command exicuted, using the query described above in the
+Dim command As New MySqlCommand (query, connection)
+Dim dr As MySql.Data. MySqlClient. MySqlDataReader
+' i is just used as a counter
+Dim i As Integer = 0
+Try
+connection. Open()
+' dr here is the reader created above with the command query
+dr = command. ExecuteReader( )
+While dr. Read
+LocalSessionJumpers.Add (New bouncer)
+With LocalSessionJumpers(i)
+runs bouncer. GetId with the value read from the ID coulumn in
+row i in the table "contacts'
+then saves the value in part of the array
+. SetContactID(dr("ContactID"))
+the following do the same as abouve, but use different areas of
+the table
+. SetFirstName(dr ("FirstName"))
+. SetLastName(dr ("LastName"))
+. setDoB (dr ( "DoB") )
+SetEmail(dr("Email"))
+. SetPhone (dr ("Phone"))
+End With
+i = i + 1
+End While
+closes database
+connection. Close( )
+Catch ex As MySqlException
+MsgBox("Error Retrieving contacts:" & ex. ErrorCode & " --- " &
+ex.Message. ToString & vbNewLine & vbNewLine & ex. ToString)
+End Try
+WriteOutLists()
+End Sub
+Private Sub WriteOutLists()
+ListView. Items. Clear( )
+creates an instance of a bouncer
+Dim b As bouncer
+' iterates throught the instances of each bouncer
+For Each b In LocalSessionJumpers
+'creates the table with details and such using each instances information
+Dim item As ListViewItem = New ListViewItem(b.GetContactID. ToString)
+ListView. Items. Add(item)
+item. SubItems . Add (b. GetFirstName)
+item. SubItems. Add (b. GetLastName)
+Next
+End Sub
+Private Sub ButtonAddRemoveMembers_Click(ByVal sender As System. Object, ByVal e As
+System. EventArgs) Handles ButtonAddRemoveMembers. Click
+Dim newPage As New AddRemoveMembers(localAllJumpers, LocalSessionJumpers,
+AddressOf UpdateSessionMembersCallback)
+newPage . Show( )
+End Sub
+Page- 215 -

@@ -1,0 +1,51 @@
+Else
+& " " & x. GetLastName)
+CheckedListBoxPossible. Items. Add (x. GetContactID & "-" & x. GetFirstName
+End If
+Next
+sortColumn(CheckedListBoxCurrent)
+End Sub
+sortColumn(CheckedListBoxPossible)
+#Region "quicksortInputs"
+Sub sortColumn(ByVal listBoxToSort As CheckedListBox)
+create the array to sort
+CreateArrayOfBouncerIDs(listBoxToSort)
+sort the array
+qsort (ArrayOfBouncerIDs)
+'write out the new, sorted, list
+listBoxToSort.Items. Clear()
+listBoxToSort. Refresh( )
+For count = 0 To ArrayOfBouncerIDs. Length - 1
+listBoxToSort.Items. Add (Localalljumpers(ArrayOfBouncerIDs (count) -
+1).GetContactID & " - " & Localalljumpers(ArrayOfBouncerIDs(count) - 1).GetFirstName &
+& Localalljumpers (ArrayOfBouncerIDs(count) - 1).GetLastName)
+Next
+End Sub
+Sub CreateArrayOfBouncerIDs(ByVal checkedlistboxToRead As CheckedListBox)
+' creates an array the size of the number of elements in the list boxes
+ReDim ArrayOfBouncerIDs(checkedlistboxToRead.Items.Count - 1)
+Dim jumperIndex As Integer
+'fills in the array with the ID values found using the regex
+For count = 0 To ArrayOfBouncerIDs. Length - 1
+'find the number in the list to add to the array
+jumperIndex = Regex. Match(checkedlistboxToRead. Items. Item(count) ,
+findNumbers).Value
+ArrayOfBouncerIDs (count) = jumperIndex
+Next
+End Sub
+#End Region
+#End Region
+#Region "quicksort"
+Sub quicksort(ByRef a() As Object, ByVal Top As Integer, ByVal Bottom As Integer)
+Dim pivot As Integer
+If Bottom - Top > 1 Then
+pivot = getpivot(a, Top, Bottom)
+pivot = partition(a, Top, Bottom, pivot)
+'recustivly sorts the list a()
+quicksort(a, Top, pivot)
+quicksort(a, pivot + 1, Bottom)
+End If
+End Sub
+Sub qsort(ByRef a() As Object)
+Dim i
+Dim ii

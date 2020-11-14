@@ -1,0 +1,56 @@
+Private Sub ButtonshowMemberPage_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonShowMemberPage.Click
+this line makes sure the item is is the correct data type that is returnes
+by the . checkedItems method below
+Dim item As ListViewItem
+For Each item In ListViewMemberList. CheckedItems
+Dim index As Integer
+index = item. SubItems. Item(0). Text
+'passes the jumper whos page has been requested and all the jumpers in the
+list.
+Dim createdPage As New MemberPage(localAlljumpers(index - 1),
+localAlljumpers)
+createdPage. Show( )
+Next
+'Me. Close()
+End Sub
+Private Sub ButtonAddNewMember_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonAddNewMember. Click
+Dim createdPage As New AddNewMember(localAlljumpers, ContactsList)
+createdPage.Show( )
+Me. Close( )
+End Sub
+Public Sub WriteOutLists(ByVal List)
+ListViewMemberList.Items.Clear()
+creates an instance of a bouncer
+Dim b As bouncer
+` iterates throught the instances of each bouncer
+For Each b In List
+'creates the table with details and such using each instances information
+Dim item As ListViewItem = New ListViewItem(b.GetContactID. ToString)
+ListViewMemberList.Items.Add (item)
+item. SubItems. Add (b. GetFirstName)
+item.SubItems.Add (b.GetLastName)
+item. SubItems. Add (b.GetDoB)
+item. SubItems. Add(b. GetEmail)
+item. SubItems. Add (b.GetPhone)
+Next
+End Sub
+#Region "Search functions"
+Private Sub TextBox1_TextChanged(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles TextBoxSearch. TextChanged
+' This piece of code is used to translate (only) the first character into its
+capital cousin and shift the cursour to the right side of the character
+If TextBoxSearch. Text. Length = 1 Then
+TextBoxSearch.Text = TextBoxSearch. Text . ToUpper
+TextBoxSearch. SelectionStart = 1
+End If
+' Created the Regex string from the search text box
+Dim regexMatch As String = TextBoxSearch. Text
+' uses The self made regex string to search for the entry in the table
+If regexMatch = "" Then
+'reset the display list
+DisplayList = localAlljumpers
+' if theres no input, write the original list
+WriteOutLists(DisplayList)
+Else

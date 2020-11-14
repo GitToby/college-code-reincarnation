@@ -1,0 +1,3 @@
+ListViewContactRelations.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+End Function
+End Class

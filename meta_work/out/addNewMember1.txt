@@ -1,0 +1,51 @@
+Imports MySql. Data. MySqlClient
+Imports System. Text. RegularExpressions
+Public Class AddNewMember
+#Region "DB connection strings and such"
+Dim connectionString As String =
+"Database=Computing2;" &
+"Data Source=localhost;" &
+"User Id=toby;" &
+"Password=chicken;'
+. ..
+' "database=Computing" selects database from the list of mysql databases, use
+"show databases" in mysql
+"data Source = localhost" uses the local machine ip as the data source for the
+database
+' "User ID=toby" selects the user from table mysql.users called toby with all the
+permissions it has
+' "password=chicken" uses the password "chicken" to check against the password
+given int the table above for a login
+'connects using mySQL using the connectionstring described
+Dim connection As New MySqlConnection(connectionString)
+#End Region
+Dim EmailValid As Boolean = False
+Dim FirstValid As Boolean = False
+Dim LastValid As Boolean = False
+Dim DoBValid As Boolean = False
+Dim PhoneValid As Boolean = False
+Dim regexName As String = ("^[A-Z]{1} [a-z]+$")
+Dim regexEmail As String = ("^[a-zA-Z][w . - ]*[a-zA-z0-9]@[a-zA-z0-9][w . - ]*[a-
+zA-Z0-9]. [a-zA-Z][a-zA-Z.]*[a-zA-Z]$")
+Dim regexPhone As String = ("^0[0-9]{10}$")
+Dim LocalAllJumpers As List(Of bouncer)
+Dim LocalContactRelations As New List(Of bouncer)
+Public Sub New(ByRef Alljumpers As List(Of bouncer), ByVal ContactRelations As
+List (Of bouncer))
+' This call is required by the designer.
+InitializeComponent()
+' Add any initialization after the InitializeComponent() call.
+LocalAllJumpers = Alljumpers
+LocalContactRelations = ContactRelations
+End Sub
+Private Sub AddNewMember_Load(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles MyBase. Load
+TextBoxEmail. BackColor = Color. Red
+TextBoxFirst. BackColor = Color. Red
+TextBoxLast. BackColor = Color. Red
+TextBoxPhone. BackColor = Color. Red
+LabelAge. BackColor = Color.Red
+End Sub
+Private Sub ButtonCancel_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonCancel. Click
+Dim createdPage As New MemberList(LocalAllJumpers)

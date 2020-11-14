@@ -1,0 +1,57 @@
+Private Sub TextBoxEmail_TextChanged(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles TextBoxEmail. TextChanged
+' checks wether the input is true
+If checkValidation(TextBoxEmail. Text, regexEmail) Then
+ApplyTrueValidation(TextBoxEmail, EmailValid)
+EmailValid = True
+Else
+ApplyFalseValidation(TextBoxEmail, EmailValid)
+End If
+End Sub
+Private Sub TextBoxFirst_TextChanged(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles TextBoxFirst. TextChanged
+` checks wether the input is true by calling Check validation
+If checkValidation(TextBoxFirst. Text, regexName) Then
+ApplyTrueValidation(TextBoxFirst, FirstValid)
+FirstValid = True
+Else
+ApplyFalseValidation(TextBoxFirst, FirstValid)
+End If
+End Sub
+Private Sub TextBoxLast_TextChanged(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles TextBoxLast. TextChanged
+" checks wether the input is true
+If checkValidation(TextBoxLast. Text, regexName) Then
+ApplyTrueValidation(TextBoxLast, LastValid)
+LastValid = True
+Else
+ApplyFalseValidation(TextBoxLast, LastValid)
+End If
+End Sub
+Private Sub TextBoxPhone_TextChanged (ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles TextBoxPhone. TextChanged
+' checks wether the input is true
+If checkValidation(TextBoxPhone. Text, regexPhone) Then
+ApplyTrueValidation(TextBoxPhone, PhoneValid)
+PhoneValid = True
+Else
+ApplyFalseValidation(TextBoxPhone, PhoneValid)
+End If
+End Sub
+#End Region
+#Region "TRUE/FALSE Validation Aplications"
+Sub ApplyTrueValidation(ByVal Textbox As Object, ByVal validStatement As Boolean)
+'changes coulour to show the change in validatioin
+Textbox. backcolor = Color. LightGreen
+'changes the valid staement passed
+validStatement = True
+'the Falsesub is a copy but with Red and False respectivy
+End Sub
+Sub ApplyFalseValidation(ByVal Textbox As Object, ByVal validStatement As Boolean)
+Textbox.backcolor = Color. Red
+validStatement = False
+End Sub
+#End Region
+Function checkValidation(ByVal Input, ByVal RegexString) As Boolean
+find a match in the input that complies with the Specific regex string
+passed into

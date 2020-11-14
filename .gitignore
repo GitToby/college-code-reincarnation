@@ -3,5 +3,6 @@
 **/__pycache__
 .ipynb_checkpoints
 **/.ipynb_checkpoints
-**/private_* # private non commit files
+**/private* # private non commit files
 **/out*.txt
+meta_work/private_secrets.py

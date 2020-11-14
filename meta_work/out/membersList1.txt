@@ -1,0 +1,50 @@
+Imports MySql. Data. MySqlClient
+Imports System. Text. RegularExpressions
+Public Class MemberList
+#Region "DB connection strings and such"
+Public connectionString As String =
+-
+"Database=Computing2; " &
+"Data Source=localhost;" & _
+"User Id=toby; " &
+"Password=chicken;"
+"database=Computing" selects database from the list of mysql databases, use
+"show databases" in mysql
+"data Source = localhost" uses the local machine ip as the data source for the
+database
+"User ID=toby" selects the user from table mysql. users called toby with all the
+permissions it has
+' "password=chicken" uses the password "chicken" to check against the password
+given int the table above for a login
+'connects using mySQL using the connectionstring described above
+Dim connection As New MySqlConnection(connectionString)
+' is the command that descrives the data retrieved
+Dim query As String = "SELECT * FROM CONTACTS"
+this is the command exicuted, using the query described above in the connection 2
+above
+Dim command As New MySqlCommand (query, connection)
+#End Region
+' two lists of bouncers are needed for the search function
+Public localAlljumpers As List(Of bouncer)
+Dim DisplayList As List(Of bouncer)
+Dim ContactsList As New List(Of bouncer)
+Private checkedItems() As Integer
+Dim LastInputLength As Integer
+Public Sub New(ByRef allJumpers As List(Of bouncer))
+This call is required by the designer.
+InitializeComponent()
+' Add any initialization after the InitializeComponent() call.
+'creates the local set of all the jumpers
+localAlljumpers = allJumpers
+End Sub
+Private Sub MemberList_Load(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles MyBase. Load
+'creates the display list
+DisplayList = localAlljumpers
+Menu
+'Writes out the list of all the members that have been retrieved by the Main
+WriteOutLists(DisplayList)
+'Auto sizes columns to width of content
+ListViewMemberList.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent)
+ListViewMemberList.GridLines = True
+End Sub

@@ -1,0 +1,48 @@
+Inherits member
+Private CoachingLevel As Integer
+End Class
+Public Class bouncer
+Inherits member
+Private MemberLevel As Integer
+End Class
+Public Class session
+Private SessionID As Integer
+Private StartTime As TimeSpan
+Private EndTime As TimeSpan
+Private DayOfWeek As String
+Private MemberType As String
+#Region "Setters"
+Sub SetSessionID(ByRef x)
+SessionID = x
+End Sub
+Sub SetStartTime(ByRef x)
+StartTime = x
+End Sub
+Sub SetEndTime(ByRef x)
+EndTime = x
+End Sub
+Sub SetDayOfWeek(ByRef x)
+DayOfWeek = x
+End Sub
+Sub SetMemberType(ByRef x)
+MemberType = x
+End Sub
+#End Region
+#Region "Getter"
+Function GetSessionID( )
+GetSessionID = SessionID
+End Function
+Function GetStartTime()
+GetStartTime = StartTime
+End Function
+Function GetEndTime()
+GetEndTime = EndTime
+End Function
+Function GetDateOfWeek( )
+GetDateOfWeek = DayOfWeek
+End Function
+Function GetMemberType( )
+GetMemberType = MemberType
+End Function
+#End Region
+End Class

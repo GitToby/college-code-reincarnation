@@ -1,0 +1,59 @@
+`TypeDescription" VARCHAR (10) NOT NULL
+) ;
+INSERT INTO ~MemberTypes VALUES (1,' 'Junior' ) ;
+INSERT INTO ~MemberTypes VALUES
+(2,
+' Adult ' ) ;
+INSERT INTO
+`MemberTypes VALUES (3, 'Club'
+) ;
+DROP TABLE IF EXISTS SessionTable ;
+CREATE
+TABLE SessionTable (
+SessionID MEDIUMINT AUTO_INCREMENT NOT NULL,
+DayOfWeek VARCHAR (10) NOT NULL,
+`StartTime' TIME NOT NULL,
+EndTime TIME NOT NULL,
+`MemberTypeKey" MEDIUMINT NOT NULL,
+PRIMARY KEY (SessionID)
+) ;
+INSERT INTO ~SessionTable VALUES
+(1, 'Monday', '18: 00:00', '20:00:00' , 1) ;
+INSERT INTO SessionTable VALUES
+(2, 'Tuesday', '18: 00: 00', '20:00 : 00' , 2) ;
+INSERT INTO SessionTable VALUES
+(3, 'Tuesday', '19:00:00', '21:00 : 00 ' , 3) ;
+DROP TABLE IF EXISTS ContactSessions ;
+CREATE
+TABLE ContactSessions (
+`ContactIDRef MEDIUMINT NOT NULL,
+~SessionIDRef MEDIUMINT NOT NULL
+) ;
+INSERT INTO ContactSessions VALUES (1,1) ;
+INSERT INTO ContactSessions VALUES
+(2, 1) ;
+INSERT INTO ContactSessions"
+VALUES
+( 3 , 1 ) ;
+INSERT INTO ContactSessions VALUES (4,1) ;
+INSERT INTO ContactSessions"
+VALUES (4,2) ;
+INSERT INTO ContactSessions"
+VALUES (5,1) ;
+INSERT INTO ContactSessions"
+VALUES (5,2) ;
+INSERT INTO ContactSessions VALUES (6,2) ;
+INSERT INTO ContactSessions VALUES (6,1) ;
+INSERT INTO ContactSessions VALUES (6,3) ;
+INSERT INTO ~ContactSessions"
+VALUES (7,2) ;
+INSERT INTO "ContactSessions"
+VALUES (8,1) ;
+INSERT INTO ContactSessions"
+VALUES (8,3) ;
+INSERT INTO ContactSessions" VALUES (9,2) ;
+INSERT INTO ~ContactSessions"
+VALUES
+(9,3) ;
+INSERT INTO ContactSessions VALUES
+(10,1) ;

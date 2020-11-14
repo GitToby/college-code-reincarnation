@@ -1,0 +1,56 @@
+es
+Imports MySql. Data. MySqlClient
+Public Class MemberTypes
+End Class
+Public Class member
+Private ContactID As Integer
+Private FirstName As String
+Private LastName As String
+Private DoB As Date
+Private Email As String
+Private phone As String
+` These are used when creating the instance of the class inorder to save each
+detail
+#Region "Setters"
+Sub SetContactID(ByRef x)
+ContactID = x
+End Sub
+Sub SetFirstName(ByRef x)
+FirstName = x
+End Sub
+Sub SetLastName (ByRef x)
+LastName = X
+End Sub
+Sub setDoB (ByRef x)
+DoB = X
+End Sub
+Sub SetEmail(ByRef x)
+Email = x
+End Sub
+Sub SetPhone(ByRef x)
+phone = x
+End Sub
+#End Region
+' The getters are used when recalling data from the specific instance of the class
+#Region "Getters"
+Function GetContactID()
+GetContactID = ContactID
+End Function
+Function GetFirstName()
+GetFirstName = FirstName
+End Function
+Function GetLastName( )
+GetLastName = LastName
+End Function
+Function GetDoB( )
+GetDoB = DoB
+End Function
+Function GetEmail()
+GetEmail = Email
+End Function
+Function GetPhone( )
+GetPhone = phone
+End Function
+#End Region
+End Class
+Public Class coach

@@ -1,0 +1,51 @@
+Send Email
+Imports System. Net. Mail
+Public Class SendEmail
+Dim LocalEmailAdrress As String
+Dim LocalName As String
+Public Sub New(ByVal EmailAdress As String, ByVal firstname As String, ByVal
+lasname As String)
+' This call is required by the designer.
+InitializeComponent()
+LocalEmailAdrress = EmailAdress
+LocalName = firstname & " " & lasname
+End Sub
+Private Sub SendEmail_Load(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles MyBase. Load
+Me. Text = "Email To: " & LocalName
+LableTo. Text = LocalEmailAdrress
+'this is the email from section
+LableFrom. Text = "toby@thedevlins.biz"
+End Sub
+Private Sub ButtonSend_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonSend. Click
+Dim sendmessage As Boolean
+If TextBoxMessage. Text. Length = 0 And TextBoxSubject. Text. Length = 0 Then
+MsgBox("There is nothing in either field, please Put information into the
+fields before sending")
+sendmessage = False
+ElseIf TextBoxSubject. Text. Length = 0 Then
+If MsgBox( "There is no Subject, Send anyway?", MsgBoxStyle. YesNo, "no
+subject") = vbYes Then
+sendmessage = True
+Else
+sendmessage = False
+End If
+ElseIf TextBoxMessage. Text. Length = 0 Then
+If MsgBox( "There is no body, Send anyway?", MsgBoxStyle. YesNo, "no
+subject") = vbYes Then
+sendmessage = True
+Else
+sendmessage = False
+End If
+Else
+sendmessage = True
+End If
+If sendmessage Then
+SendEmail(TextBoxSubject.Text, TextBoxMessage. Text)
+End If
+End Sub
+Sub SendEmail(ByVal Subject As String, ByVal Body As String)
+Try
+'creates a variable to handle the sending of the email
+Dim smtpserver As New SmtpClient()

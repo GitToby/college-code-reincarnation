@@ -1,0 +1,60 @@
+28089
+Godalming College - Centre number
+COMP4 Project
+' THE BELOW IF STATEMENT selects wether to use the main stored list, or
+wether to use the list being shown
+' the selection is done by counting the number of inputs the user has
+made, if the number of characters
+in the textbox is les than the last number of charaters inputted then
+the backspace has been pressed
+If TextBoxSearch. Text. Length < LastInputLength Then
+'when backspace is pressed:
+DisplayList = NewList(regexMatch, localAlljumpers)
+Else
+'if any other key is presses
+DisplayList = NewList (regexMatch, DisplayList)
+End If
+' writes out the new list that has been searched
+WriteOutLists(DisplayList)
+' as long as minimal spelling mistakes are made this is multitudes faster
+than the original for large sets of data
+End If
+'set the last number of letters typed in
+LastInputLength = TextBoxSearch. Text. Length
+End Sub
+Function NewList(ByVal RegexString As String, ByVal List1 As List(Of bouncer)) As
+List (Of bouncer)
+Dim b As bouncer
+Dim i As Integer = 0
+Dim localList As New List(Of bouncer)
+' iterates throught the instances of each bouncer in the list given
+For Each b In List1
+find a match in the input that complies with the regex string in search
+bar
+Dim m1 As Match = Regex.Match(List1(i).GetContactID. ToString, RegexString)
+Dim m2 As Match = Regex. Match( List1(i) . GetFirstName, RegexString)
+Dim m3 As Match = Regex. Match(List1(i). GetLastName, RegexString)
+' m1: IDs | m2: First Names | m3: last Names
+' Adding an m4 for emails, phones or any other piece in the system is done
+by this section: "List1(i) . GetVARIABLE"
+If m1.Success Or m2.Success Or m3. Success Then
+'if sucessful, add to the list to be written up, otherwise do nothing
+localList.Add(List1(i))
+End If
+' increment to change the bouncer being searched
+i = i + 1
+Next
+NewList = localList
+End Function
+#End Region
+Private Sub ButtonBack_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonBack.Click
+MainMenu. Show( )
+Me. Close( )
+End Sub
+Private Sub ButtonRefresh_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles ButtonRefresh. Click
+ListViewMemberList. Refresh( )
+End Sub
+End Class
+189

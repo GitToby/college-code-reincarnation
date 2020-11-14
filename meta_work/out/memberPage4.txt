@@ -1,0 +1,14 @@
+item. SubItems.Add(s. GetDateOfWeek)
+item. SubItems.Add(s.GetStartTime. ToString)
+item.SubItems.Add(s.GetEndTime. ToString)
+item. SubItems. Add(s. GetMemberType)
+Next
+End If
+End Sub
+Private Sub Button1_Click(ByVal sender As System.Object, ByVal e As
+System. EventArgs) Handles Button1. Click
+Dim CreatePage As New SendEmail(DisplayMember.GetEmail,
+DisplayMember. GetFirstName, DisplayMember. GetLastName)
+CreatePage. Show( )
+End Sub
+End Class
