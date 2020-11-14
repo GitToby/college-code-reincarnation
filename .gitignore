@@ -1,0 +1,4 @@
+meta_work/img/*
+.venv
+.ipynb_checkpoints
+**/.ipynb_checkpoints
